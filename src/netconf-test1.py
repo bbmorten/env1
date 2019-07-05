@@ -14,7 +14,7 @@ N9K-1(xmlin)# show interface
 
 % Success
 '''
-
+# pip install ncclient
 # https://pubhub.devnetcloud.com/media/netdevops-live/site/files/s01t03.pdf?0.5791515979650677
 
 from ncclient import manager
@@ -40,16 +40,6 @@ xml_rsp = nc_get_reply.data_ele.find('.//mod:hostname', ns_map)
 value = xml_rsp.text
 print(value)
 
-get_filter = """
-      <show>
-        <interface/>
-      </show>
-      """
-
-nc_get_reply = device.get(('subtree', get_filter))
-print(nc_get_reply.xml)
-ns_map = {'mod': 'http://www.cisco.com/nxos:1.0:vdc_mgr'}
-xml_rsp = nc_get_reply.data_ele.findall('.//mod:interface', ns_map)
 
 
 device.close_session()
